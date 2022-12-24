@@ -20,8 +20,7 @@ def_q_list = {i+1: q for i, q in enumerate(default_questions)}
 
 def decrypt(body, key: bytes):
     sk, iv = key, key[:16]
-    #sk = sk.encode('utf-8')
-    #iv = iv.encode('utf-8')
+
     cipher = AES.new(sk, AES.MODE_CBC, IV=iv)
     data = b64decode(body)
     result = Padding.unpad(cipher.decrypt(data), PAD_LENGTH)
@@ -30,8 +29,7 @@ def decrypt(body, key: bytes):
 
 def encrypt(data, key: bytes):
     sk, iv = key, key[:16]
-    #sk = sk.encode('utf-8')
-    #iv = iv.encode('utf-8')
+
     data = data.encode('utf-8')
 
     cipher = AES.new(sk, AES.MODE_CBC, IV=iv)
@@ -174,6 +172,6 @@ if __name__ == '__main__':
     action = input()
 
     if action == "1":
-        result = encrypt_procedure()
+        encrypt_procedure()
     elif action == "2":
         decrypt_procedure()
